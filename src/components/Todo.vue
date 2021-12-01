@@ -26,7 +26,7 @@ import axios from 'axios'
 import deleteIcon from '../assets/trash.svg'
 import refetchIcon from '../assets/refetch.svg'
 const addTaskToDB=function(task){
-
+    console.log('addTask')
     // Open the indexedDB.
     var request = indexedDB.open('todo');
     request.onerror = function(event) {
@@ -40,7 +40,8 @@ const addTaskToDB=function(task){
         objectStore.createIndex("finished", "finished", { unique: false });
         objectStore.createIndex("synced", "synced", { unique: false });
     };
-    request.onsuccess=function(e){   
+    request.onsuccess=function(e){ 
+        console.log('success')  
         var db=e.target.result
         var request = db.transaction(["tasks"], "readwrite")
         .objectStore("tasks")
@@ -56,6 +57,14 @@ const addTaskToDB=function(task){
 }
 const getTasksFromDB=function(){
     var request = indexedDB.open('todo');
+        request.onupgradeneeded = function(event) {
+        console.log('upgrade')
+        var db = event.target.result;
+        var objectStore = db.createObjectStore("tasks", { keyPath: "id",  "autoIncrement": true });
+        objectStore.createIndex("value", "value", { unique: false });
+        objectStore.createIndex("finished", "finished", { unique: false });
+        objectStore.createIndex("synced", "synced", { unique: false });
+    };
     request.onsuccess=function(e){
         var db=e.target.result
          var request = db.transaction(["tasks"], "readwrite")
