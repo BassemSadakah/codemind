@@ -26,14 +26,12 @@ import axios from 'axios'
 import deleteIcon from '../assets/trash.svg'
 import refetchIcon from '../assets/refetch.svg'
 const addTaskToDB=function(task){
-    console.log('addTask')
     // Open the indexedDB.
     var request = indexedDB.open('todo');
     request.onerror = function(event) {
         // Handle errors.
     };
     request.onupgradeneeded = function(event) {
-        console.log('upgrade')
         var db = event.target.result;
         var objectStore = db.createObjectStore("tasks", { keyPath: "id",  "autoIncrement": true });
         objectStore.createIndex("value", "value", { unique: false });
@@ -41,7 +39,6 @@ const addTaskToDB=function(task){
         objectStore.createIndex("synced", "synced", { unique: false });
     };
     request.onsuccess=function(e){ 
-        console.log('success')  
         var db=e.target.result
         var request = db.transaction(["tasks"], "readwrite")
         .objectStore("tasks")
@@ -58,7 +55,6 @@ const addTaskToDB=function(task){
 const getTasksFromDB=function(){
     var request = indexedDB.open('todo');
         request.onupgradeneeded = function(event) {
-        console.log('upgrade')
         var db = event.target.result;
         var objectStore = db.createObjectStore("tasks", { keyPath: "id",  "autoIncrement": true });
         objectStore.createIndex("value", "value", { unique: false });
@@ -117,7 +113,6 @@ export default {
     },
     methods:{
         handleFocus(isFocused){
-            console.log(this.tasks)
             this.input_focused=isFocused
         },
         handleAddTask(){
@@ -140,7 +135,6 @@ export default {
             this.tasks.splice(index,1)
             if(task.id){
                 deleteTaskFromDB.call(this,task.id)
-                console.log(task.id)
             }
 
         }
