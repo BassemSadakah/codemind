@@ -1,4 +1,4 @@
-# codemind_todo_vue
+# codemind
 
 ## Project setup
 ```
