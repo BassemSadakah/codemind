@@ -6,12 +6,13 @@
             <img :src="data?.profile" class="object-cover h-48 w-48 rounded-full m-auto border-2 border-gray-300 "/>
             <p class="text-2xl mt-5">{{this.data.name}}</p>
             <p class="text-sm text-gray-400 font-light	block sm:hidden">4128-4125-1234</p>
+            <p v-show="this.last_seen=='Active now'" class="mt-1 text-green-500 bg-green-100 px-3 py-0.5 inline rounded-md" :class="{'sm:hidden':this.last_seen=='Active now'}"> Active now</p>
             <Rating :rate='data.rating'/>
             <!-- <hr class="mx-7 mt-4 border-none h-0.5 bg-gray-200"/> -->
-            <hr class="mx-7 mt-4 "/>
+            <hr class="mx-7 mt-4 "  :class="{'hidden sm:block':this.last_seen=='Active now'}"/>
             <div class="grid text-center lg:text-left grid-cols-1 lg:grid-cols-1 sm:grid-cols-2 mx-10 text-left">
-                <div>
-                    <p class=" text-gray-400 mt-7">Last Seen</p>
+                <div  :class="{'hidden sm:block':this.last_seen=='Active now'}">
+                    <p class=" text-gray-400 mt-7" >Last Seen</p>
                     <p class="mt-1"> {{this.last_seen}}</p>
                 </div>
                 <div class="hidden sm:block">
@@ -202,7 +203,7 @@ export default {
             this.license_end.color=this.license_end.d>50?'#4BB543':this.license_end.d>25?'#EED202':'#f32013'
             this.health_end.color=this.health_end.d>50?'#4BB543':this.health_end.d>25?'#EED202':'#f32013'
             this.national_end.color=this.national_end.d>50?'#4BB543':this.national_end.d>25?'#EED202':'#f32013'
-            
+            // this.data.active=Date.now() //To set status Active now
             this.last_seen=since_when((this.data.active*1000))
             
             console.log(error)
