@@ -39,7 +39,7 @@
                 <!-- <p class="text-2xl font-bold text-left absolute top-52">Motor</p>
                 <p class="text-lg leading-8 text-gray-500 text-left absolute top-60">123-123</p> -->
             </div>
-                <img class="m-auto w-120" :src="carImg"/>
+                <img class="m-auto w-120" style="margin-top:-50px;" :src="carImg"/>
                 <!-- <p class="text-gray-400">4.7/5</p> -->
                 <Rating :rate="data.health_rating"/>
             </div>
