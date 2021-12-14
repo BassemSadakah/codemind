@@ -3,6 +3,7 @@
     <nav className="top-0 h-12 fixed w-screen shadow-md bg-white z-50" ></nav>
     <div class="2xl:inline-block hidden bg-white h-screen w-64 shadow float-left"></div>
     <DriverProfile />
+    <!-- <CarProfile /> -->
     <!-- <Todo/> -->
     <Receipt 
     :receipt_details="{car_code:'1241-7450',user_code:'4211-7412',branch:'Main',odometer:'124'}"
@@ -18,12 +19,14 @@
 import Todo from './components/Todo.vue'
 import Receipt from './components/Receipt.vue'
 import DriverProfile from './components/DriverProfile.vue'
+import CarProfile from './components/CarProfile.vue'
 export default { 
   name: 'App',
   components: {
     Todo,
     Receipt,
-    DriverProfile
+    DriverProfile,
+    CarProfile
   }
 }
 </script>
